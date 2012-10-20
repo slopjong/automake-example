@@ -1,5 +1,4 @@
-
-AC_PREREQ([2.69])
+AC_PREREQ([2.65])
 
 AC_INIT([My hello world example], [0.1])
 
