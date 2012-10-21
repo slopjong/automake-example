@@ -1,0 +1,53 @@
+digraph autotools {
+        fontname=LiberationMono;
+        ordering=out;
+        "configure.ac" [shape=box];
+        autoscan -> "configure.ac" [style=bold,arrowsize=1.5];
+        "Makefile.am" [shape=box];
+        ed [style=invis];
+        ed -> "Makefile.am" [style=invis];
+        "configure.ac" -> aclocal [arrowhead=open];
+        "configure.ac" -> autoconf [arrowhead=open];
+        "configure.ac" -> autoheader [arrowhead=open];
+        "configure.ac" -> automake [arrowhead=open];
+        "aclocal.m4" [shape=box];
+        aclocal -> "aclocal.m4" [style=bold,arrowsize=1.5];
+        "config.h.in" [shape=box];
+        autoheader -> "config.h.in" [style=bold,arrowsize=1.5];
+        "Makefile.am" -> automake [arrowhead=open];
+        "Makefile.in" [shape=box];
+        automake -> "Makefile.in" [style=bold,arrowsize=1.5];
+        {rank=same; aclocal autoheader automake}
+        {rank=same; "aclocal.m4" "config.h.in" "Makefile.in"}
+        configure [shape=Mcircle,width=2,height=2];
+        "aclocal.m4" -> autoconf [arrowhead=open];
+        autoconf -> configure [style=bold,arrowsize=1.5];
+        "config.h" [shape=box];
+        Makefile [shape=box];
+        {rank=same; "config.h" Makefile}
+        "config.status" [shape=Mcircle];
+        "config.h.in" -> "config.status" [arrowhead=open];
+        "Makefile.in" -> "config.status" [arrowhead=open];
+        dummy0 [style=invis];
+        dummy1 [style=invis];
+        configure -> "config.status" [style=bold,arrowsize=1.5];
+        "config.status" -> dummy0 [style=invis];
+        "config.status" -> "config.h" [style=bold,arrowsize=1.5];
+        "config.status" -> Makefile [style=bold,arrowsize=1.5];
+        "config.status" -> dummy1 [style=invis];
+        "config.h" -> make [arrowhead=open];
+        Makefile -> make [arrowhead=open];
+        dummy1 -> make [style=invis];
+        "executable" [label="LABEL_executable",shape=box"];
+        make -> "executable" [style=bold,arrowsize=1.5];
+
+        subgraph legend {
+                "input file" [label="LABEL_input_file",fontname="Palatino-Italic",shape=box];
+                "config.status" -> "input file" [style=invis];
+                "input file" -> process [label="  LABEL_influences  ",arrowhead=open];
+                process [label="LABEL_process",fontname="Palatino-Italic"];
+                "output file" [label="LABEL_output_file",fontname="Palatino-Italic",shape=box];
+                process -> "output file" [label="  LABEL_creates  ",style=bold,arrowsize=1.5];
+        }
+
+}

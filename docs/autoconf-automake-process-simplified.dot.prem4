@@ -1,0 +1,17 @@
+digraph autotools {
+        fontname=LiberationMono;
+        ordering=in;
+        "configure.ac" [shape=box];
+        autoscan -> "configure.ac" [style=bold,arrowsize=1.5];
+        "Makefile.am" [shape=box];
+        "configure.ac" -> autoreconf [arrowhead=open];
+        "Makefile.am" -> autoreconf [arrowhead=open];
+        "autoreconf" -> "config.h" [style=bold,arrowsize=1.5];
+        "autoreconf" -> Makefile [style=bold,arrowsize=1.5];
+	"config.h" [shape=box];
+        "config.h" -> make [arrowhead=open];
+	"Makefile" [shape=box];
+        Makefile -> make [arrowhead=open];
+        "executable" [label="LABEL_executable",shape=box,fontname="Palatino-Italic"];
+        make -> "executable" [style=bold,arrowsize=1.5];
+}
