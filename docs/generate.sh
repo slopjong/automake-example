@@ -1,4 +1,7 @@
 #!/bin/sh
+
+command -v dot >/dev/null 2>&1 || { echo >&2 "I require the dot tool from the graphviz package but it's not installed. Aborting."; exit 1; }
+
 N="autoconf-automake-process-simplified"
 
 m4 \
